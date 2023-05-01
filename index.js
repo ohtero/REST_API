@@ -14,13 +14,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 
-mongoose.connect('mongodb+srv://tester:testerpass1@cluster0.bc5yosh.mongodb.net/music')
-  .then(() => {
-    app.listen (PORT, () => {
-      console.log(`Connected to db`);
-    })
-  })
-  .catch(e => console.error(e));
+mongoose.connect('mongodb+srv://tester:testerpass1@cluster0.bc5yosh.mongodb.net/music');
 
 app.get('/api/getall', getAllEntries);
 
