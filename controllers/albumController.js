@@ -63,6 +63,8 @@ async function updateEntry(req, res) {
       return res.status(200).json('Id is not a valid id!' );
     };
 
+    const album = await Album.findByIdAndUpdate(id, { ...req.body });
+
     if (!album) {
       return res.status(200).json('No album found with such id!')
     };
@@ -74,7 +76,7 @@ async function updateEntry(req, res) {
       };
     };
     
-    const album = await Album.findByIdAndUpdate(id, { ...req.body });
+    
 
  
     res.status(200).json(`Entry with id: '${id}' updated successfully! Current values are artist: '${body.artist}', album name: '${body.albumName}', release year: '${body.releaseYear}'.`);
