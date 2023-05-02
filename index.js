@@ -1,32 +1,34 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const mongoose = require('mongoose');
-require('dotenv').config();
+const mongoose = require("mongoose");
+require("dotenv").config();
 
-const { 
+const {
   getAllEntries,
-  getEntryById, 
+  getEntryById,
   createEntry,
   updateEntry,
-  deleteEntry } = require('./controllers/albumController')
+  deleteEntry,
+} = require("./controllers/albumController");
 
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
+mongoose.connect(
+  `mongodb+srv://${process.env.USER}:${process.env.PASS}@cluster0.bc5yosh.mongodb.net/music`
+);
 
-mongoose.connect(`mongodb+srv://${process.env.USER}:${process.env.PASS}@cluster0.bc5yosh.mongodb.net/music`);
+app.get("/api/getall", getAllEntries);
 
-app.get('/api/getall', getAllEntries);
+app.get("/api/:id", getEntryById);
 
-app.get('/api/:id', getEntryById)
+app.post("/api/add", createEntry);
 
-app.post('/api/add', createEntry);
+app.patch("/api/update/:id", updateEntry);
 
-app.patch('/api/update/:id', updateEntry);
-
-app.delete('/api/delete/:id', deleteEntry);
+app.delete("/api/delete/:id", deleteEntry);
 
 app.listen(PORT, () => {
-  console.log(`Listening to port ${PORT}`)
+  console.log(`Listening to port ${PORT}`);
 });
