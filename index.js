@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+require('dotenv').config();
 
 const { 
   getAllEntries,
@@ -14,7 +15,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 
-mongoose.connect('mongodb+srv://tester:testerpass1@cluster0.bc5yosh.mongodb.net/music');
+mongoose.connect(`mongodb+srv://${process.env.USER}:${process.env.PASS}@cluster0.bc5yosh.mongodb.net/music`);
 
 app.get('/api/getall', getAllEntries);
 
