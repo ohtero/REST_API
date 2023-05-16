@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const cors = require('cors');
 require("dotenv").config();
 
 const {
@@ -11,9 +12,10 @@ const {
   deleteEntry,
 } = require("./controllers/albumController");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
 app.use(express.json());
+app.use(cors());
 
 mongoose.connect(
   `mongodb+srv://${process.env.USER}:${process.env.PASS}@cluster0.bc5yosh.mongodb.net/music`
